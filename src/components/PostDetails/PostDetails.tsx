@@ -59,64 +59,62 @@ export const PostDetails: React.FC<Props> = ({ selectedPost }) => {
 
   return (
     <div className="content" data-cy="PostDetails">
-      <div className="content" data-cy="PostDetails">
-        <div className="block">
-          <h2 data-cy="PostTitle">
-            #{selectedPost?.id}: {selectedPost?.title}
-          </h2>
+      <div className="block">
+        <h2 data-cy="PostTitle">
+          #{selectedPost?.id}: {selectedPost?.title}
+        </h2>
 
-          <p data-cy="PostBody">{selectedPost?.body}</p>
-        </div>
+        <p data-cy="PostBody">{selectedPost?.body}</p>
+      </div>
 
-        <div className="block">
-          {isLoading && <Loader />}
+      <div className="block">
+        {isLoading && <Loader />}
 
-          {hasError && (
-            <div className="notification is-danger" data-cy="CommentsError">
-              Something went wrong
-            </div>
-          )}
+        {hasError && (
+          <div className="notification is-danger" data-cy="CommentsError">
+            Something went wrong
+          </div>
+        )}
 
-          {!isLoading && !hasError && comments.length === 0 && (
-            <p className="title is-4" data-cy="NoCommentsMessage">
-              No comments yet
-            </p>
-          )}
+        {!isLoading && !hasError && comments.length === 0 && (
+          <p className="title is-4" data-cy="NoCommentsMessage">
+            No comments yet
+          </p>
+        )}
 
-          {!isLoading && !hasError && comments.length > 0 && (
-            <>
-              <p className="title is-4">Comments:</p>
+        {!isLoading && !hasError && comments.length > 0 && (
+          <>
+            <p className="title is-4">Comments:</p>
 
-              {comments.map(comment => (
-                <CommentItem
-                  key={comment.id}
-                  comment={comment}
-                  onDelete={handleDeleteComment}
-                />
-              ))}
-            </>
-          )}
+            {comments.map(comment => (
+              <CommentItem
+                key={comment.id}
+                comment={comment}
+                onDelete={handleDeleteComment}
+              />
+            ))}
+          </>
+        )}
 
-          {!isLoading && !hasError && !isFormVisible && (
-            <button
-              data-cy="WriteCommentButton"
-              type="button"
-              className="button is-link"
-              onClick={() => setIsFormVisible(true)}
-            >
-              Write a comment
-            </button>
-          )}
-        </div>
-
-        {isFormVisible && selectedPost && (
-          <NewCommentForm
-            postId={selectedPost.id}
-            onAddComment={handleAddComment}
-            onError={() => setHasError(true)}
-          />
+        {!isLoading && !hasError && !isFormVisible && (
+          <button
+            data-cy="WriteCommentButton"
+            type="button"
+            className="button is-link"
+            onClick={() => setIsFormVisible(true)}
+          >
+            Write a comment
+          </button>
         )}
       </div>
+
+      {isFormVisible && selectedPost && (
+        <NewCommentForm
+          postId={selectedPost.id}
+          onAddComment={handleAddComment}
+          onError={() => setHasError(true)}
+        />
+      )}
     </div>
   );
 };

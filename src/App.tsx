@@ -16,7 +16,7 @@ import { getPosts } from './api/postApi';
 
 export const App = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [selectedUser, setSelectUser] = useState<User | null>(null);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoadingPosts, setIsLoadingPosts] = useState(false);
@@ -67,7 +67,7 @@ export const App = () => {
                 <UserSelector
                   users={users}
                   selectedUser={selectedUser}
-                  onSelectUser={setSelectUser}
+                  onSelectUser={setSelectedUser}
                 />
               </div>
 
